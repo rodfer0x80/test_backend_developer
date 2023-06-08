@@ -24,7 +24,7 @@ $ docker exec -i $(docker ps -aqf "name=^spots$") psql -U postgres -d spots -c "
 ## Query
 SELECT
   name,
-  substring(website from '(?:https?://)?([^/?]+)') AS domain,
+  regexp_replace(substring(website from '(?:https?://)?([^/?]+)'), 'www.', '') AS domain,
   COUNT(*) AS count_number
 FROM
   "MY_TABLE"
